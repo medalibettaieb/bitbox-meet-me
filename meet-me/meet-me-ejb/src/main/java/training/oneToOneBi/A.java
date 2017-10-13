@@ -1,4 +1,4 @@
-package oneToOneBi;
+package training.oneToOneBi;
 
 import java.io.Serializable;
 
