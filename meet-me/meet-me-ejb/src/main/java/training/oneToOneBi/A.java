@@ -2,6 +2,7 @@ package training.oneToOneBi;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -16,7 +17,7 @@ public class A implements Serializable {
 
 	@Id
 	private int IdA;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private B b;
 	private static final long serialVersionUID = 1L;
 
