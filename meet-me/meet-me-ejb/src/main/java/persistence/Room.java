@@ -7,13 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: Room
  *
  */
 @Entity
-
+@Table(name="T_ROOM")
 public class Room implements Serializable {
 
 	@Id

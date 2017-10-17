@@ -6,13 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: User
  *
  */
 @Entity
-
+@Table(name="T_USER")
 public class User implements Serializable {
 
 	@Id
