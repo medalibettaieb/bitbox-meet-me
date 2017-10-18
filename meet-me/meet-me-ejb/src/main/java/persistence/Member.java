@@ -1,8 +1,10 @@
 package persistence;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import persistence.User;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * Entity implementation class for Entity: Member
@@ -11,7 +13,7 @@ import persistence.User;
 @Entity
 
 public class Member extends User implements Serializable {
-
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	private static final long serialVersionUID = 1L;
 
@@ -26,5 +28,5 @@ public class Member extends User implements Serializable {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
-   
+
 }
