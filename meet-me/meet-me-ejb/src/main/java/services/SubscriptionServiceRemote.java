@@ -12,4 +12,7 @@ public interface SubscriptionServiceRemote {
 	void assignRoomToUser(User user, Room room);
 
 	void deleteUserFromRoom(User user);
+
+	void assignSuperviserToRoom(User user, Room room);
+
 }

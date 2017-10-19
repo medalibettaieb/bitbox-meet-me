@@ -59,32 +59,27 @@ public class BasicOps implements BasicOpsRemote, BasicOpsLocal {
 
 	@Override
 	public void addRoom(Room room) {
-		// TODO Auto-generated method stub
-
+		entityManager.persist(room);
 	}
 
 	@Override
 	public void deleteRoom(Room room) {
-		// TODO Auto-generated method stub
-
+		entityManager.remove(entityManager.merge(room));
 	}
 
 	@Override
 	public void updateRoom(Room room) {
-		// TODO Auto-generated method stub
-
+		entityManager.merge(room);
 	}
 
 	@Override
 	public Room findRoomById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Room.class, id);
 	}
 
 	@Override
 	public List<Room> findAllRooms() {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createQuery("SELECT z FROM Room z", Room.class).getResultList();
 	}
 
 }

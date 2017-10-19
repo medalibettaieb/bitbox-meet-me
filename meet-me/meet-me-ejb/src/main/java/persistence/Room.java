@@ -3,7 +3,9 @@ package persistence;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -14,7 +16,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="T_ROOM")
+@Table(name = "T_ROOM")
 public class Room implements Serializable {
 
 	@Id
@@ -25,7 +27,7 @@ public class Room implements Serializable {
 	@OneToOne
 	private User superviser;
 
-	@OneToMany(mappedBy="roomSubscribedIn")
+	@OneToMany(mappedBy = "roomSubscribedIn", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private List<User> members;
 	private static final long serialVersionUID = 1L;
 
@@ -71,6 +73,13 @@ public class Room implements Serializable {
 
 	public void setSuperviser(User superviser) {
 		this.superviser = superviser;
+	}
+
+	public void linkUsersToThisRoom(List<User> users) {
+		this.members = users;
+		for (User u : users) {
+			u.setRoomSubscribedIn(this);
+		}
 	}
 
 }
