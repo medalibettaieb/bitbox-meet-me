@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import persistence.Hobby;
+import persistence.Member;
 import persistence.Room;
 import persistence.User;
 
@@ -59,6 +61,36 @@ public class SubscriptionService implements SubscriptionServiceRemote, Subscript
 
 		basicOpsLocal.updateRoom(room);
 
+	}
+
+	@Override
+	public List<Room> matchesRooms(User user) {
+		Room room = basicOpsLocal.findRoomById(1);
+		Hobby hobby = Hobby.MUSIC;
+		getAverageByHobbyByRoom(room, hobby);
+		return null;
+	}
+
+	public Float getAverageByHobbyByRoom(Room room, Hobby hobby) {
+		List<User> memebers = room.getMembers();
+		if (memebers != null) {
+			int[] hobbiesValuesByMember = new int[memebers.size()];
+			for (User u : memebers) {
+
+				hobbiesValuesByMember[memebers.indexOf(u)] = ((Member) u).getHobbiesValues().get(hobby);
+				System.out.println("the member " + ((Member) u).getName() + "and the score is :"
+						+ hobbiesValuesByMember[memebers.indexOf(u)]);
+			}
+		}
+
+		return null;
+
+	}
+
+	@Override
+	public List<User> matchesMember(User theNewOne, Room room) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

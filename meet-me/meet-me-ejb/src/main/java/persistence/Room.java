@@ -1,11 +1,14 @@
 package persistence;
 
+import java.awt.Color;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -20,9 +23,10 @@ import javax.persistence.Table;
 public class Room implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int number;
-	private String color;
+	private Color color;
 
 	@OneToOne
 	private User superviser;
@@ -33,6 +37,12 @@ public class Room implements Serializable {
 
 	public Room() {
 		super();
+	}
+
+	public Room(int number, Color color) {
+		super();
+		this.number = number;
+		this.color = color;
 	}
 
 	public int getId() {
@@ -51,11 +61,11 @@ public class Room implements Serializable {
 		this.number = number;
 	}
 
-	public String getColor() {
+	public Color getColor() {
 		return this.color;
 	}
 
-	public void setColor(String color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 

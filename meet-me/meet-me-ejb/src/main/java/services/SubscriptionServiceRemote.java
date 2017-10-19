@@ -1,5 +1,7 @@
 package services;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import persistence.Room;
@@ -14,5 +16,9 @@ public interface SubscriptionServiceRemote {
 	void deleteUserFromRoom(User user);
 
 	void assignSuperviserToRoom(User user, Room room);
+
+	List<Room> matchesRooms(User user);
+
+	List<User> matchesMember(User theNewOne, Room room);
 
 }

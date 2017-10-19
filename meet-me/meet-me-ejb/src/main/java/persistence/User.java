@@ -3,6 +3,8 @@ package persistence;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -13,10 +15,11 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="T_USER")
+@Table(name = "T_USER")
 public class User implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String login;
@@ -24,13 +27,20 @@ public class User implements Serializable {
 
 	@OneToOne(mappedBy = "superviser")
 	private Room roomSupervised;
-	
+
 	@ManyToOne
 	private Room roomSubscribedIn;
 	private static final long serialVersionUID = 1L;
 
 	public User() {
 		super();
+	}
+
+	public User(String name, String login, String password) {
+		super();
+		this.name = name;
+		this.login = login;
+		this.password = password;
 	}
 
 	public int getId() {

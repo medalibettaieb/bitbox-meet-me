@@ -1,10 +1,13 @@
 package persistence;
 
 import java.io.Serializable;
+import java.util.Map;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 
 /**
  * Entity implementation class for Entity: Member
@@ -15,10 +18,18 @@ import javax.persistence.Enumerated;
 public class Member extends User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
+	@ElementCollection(fetch=FetchType.EAGER)
+	private Map<Hobby, Integer> hobbiesValues;
 	private static final long serialVersionUID = 1L;
 
 	public Member() {
 		super();
+	}
+
+	public Member(String name, String login, String password, Gender gender, Map<Hobby, Integer> hobbiesValues) {
+		super(name, login, password);
+		this.gender = gender;
+		this.hobbiesValues = hobbiesValues;
 	}
 
 	public Gender getGender() {
@@ -27,6 +38,14 @@ public class Member extends User implements Serializable {
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+
+	public Map<Hobby, Integer> getHobbiesValues() {
+		return hobbiesValues;
+	}
+
+	public void setHobbiesValues(Map<Hobby, Integer> hobbiesValues) {
+		this.hobbiesValues = hobbiesValues;
 	}
 
 }

@@ -1,11 +1,11 @@
 package gui;
 
+import java.awt.Color;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import persistence.Gender;
-import persistence.Member;
 import persistence.Room;
 import services.BasicOpsRemote;
 
@@ -16,11 +16,10 @@ public class TestAddRoom {
 		BasicOpsRemote basicOpsRemote = (BasicOpsRemote) context
 				.lookup("meet-me-ear/meet-me-ejb/BasicOps!services.BasicOpsRemote");
 
-		Room room=new Room();
-		room.setId(1);
-		room.setColor("red");
+		Room room = new Room();
+		room.setColor(new Color(255, 255, 0));
 		room.setNumber(90);
-		
+
 		basicOpsRemote.addRoom(room);
 	}
 

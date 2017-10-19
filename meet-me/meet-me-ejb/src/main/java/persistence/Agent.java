@@ -19,7 +19,13 @@ public class Agent extends User implements Serializable {
 
 	public Agent() {
 		super();
-	}   
+	}  
+	
+	public Agent(String name, String login, String password, String level) {
+		super(name, login, password);
+		this.level = level;
+	}
+
 	public String getLevel() {
 		return this.level;
 	}
