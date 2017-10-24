@@ -33,6 +33,9 @@ public class Room implements Serializable {
 
 	@OneToMany(mappedBy = "roomSubscribedIn", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private List<User> members;
+	
+	@OneToMany(mappedBy="room")
+	private List<SubscriptionRequest> subscriptionRequests;
 	private static final long serialVersionUID = 1L;
 
 	public Room() {
@@ -90,6 +93,14 @@ public class Room implements Serializable {
 		for (User u : users) {
 			u.setRoomSubscribedIn(this);
 		}
+	}
+
+	public List<SubscriptionRequest> getSubscriptionRequests() {
+		return subscriptionRequests;
+	}
+
+	public void setSubscriptionRequests(List<SubscriptionRequest> subscriptionRequests) {
+		this.subscriptionRequests = subscriptionRequests;
 	}
 
 }

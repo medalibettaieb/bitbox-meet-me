@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -9,7 +10,10 @@ import javax.persistence.PersistenceContext;
 
 import persistence.Hobby;
 import persistence.Member;
+import persistence.ResquestStatus;
 import persistence.Room;
+import persistence.SubscriptionId;
+import persistence.SubscriptionRequest;
 import persistence.User;
 import utilities.Statistics;
 
@@ -99,6 +103,32 @@ public class SubscriptionService implements SubscriptionServiceRemote, Subscript
 	public List<User> matchesMember(User theNewOne, Room room) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void requestForSubscription(User member, Room room) {
+		SubscriptionRequest subscriptionRequest = new SubscriptionRequest(member, room);
+
+		entityManager.persist(subscriptionRequest);
+
+	}
+
+	@Override
+	public SubscriptionRequest findSubscriptionRequestById(User user, Room room, Date date) {
+		return entityManager.find(SubscriptionRequest.class, new SubscriptionId(room.getId(), user.getId(), date));
+	}
+
+	@Override
+	public void requestTreatement(User user, Room room, Date date, ResquestStatus status) {
+		SubscriptionRequest subscriptionRequest = findSubscriptionRequestById(user, room, date);
+		subscriptionRequest.setStateOfTheRequest(status);
+		if (status == ResquestStatus.ACCEPTED) {
+			assignUserToRoom(user, room);
+		} else {
+			System.out.println("RAS");
+		}
+
+		entityManager.merge(subscriptionRequest);
 	}
 
 }

@@ -1,12 +1,14 @@
 package persistence;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,6 +32,9 @@ public class User implements Serializable {
 
 	@ManyToOne
 	private Room roomSubscribedIn;
+
+	@OneToMany(mappedBy = "member")
+	private List<SubscriptionRequest> subscriptionRequests;
 	private static final long serialVersionUID = 1L;
 
 	public User() {
@@ -89,6 +94,14 @@ public class User implements Serializable {
 
 	public void setRoomSubscribedIn(Room roomSubscribedIn) {
 		this.roomSubscribedIn = roomSubscribedIn;
+	}
+
+	public List<SubscriptionRequest> getSubscriptionRequests() {
+		return subscriptionRequests;
+	}
+
+	public void setSubscriptionRequests(List<SubscriptionRequest> subscriptionRequests) {
+		this.subscriptionRequests = subscriptionRequests;
 	}
 
 }
