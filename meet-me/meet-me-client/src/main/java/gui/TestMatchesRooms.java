@@ -20,9 +20,9 @@ public class TestMatchesRooms {
 		ReportingServiceRemote reportingServiceRemote = (ReportingServiceRemote) context
 				.lookup("meet-me-ear/meet-me-ejb/ReportingService!services.ReportingServiceRemote");
 
-		User user = basicOpsRemote.findUserById(2);
+		User user = basicOpsRemote.findUserById(4);
 
-		subscriptionServiceRemote.matchesRooms(user);
+		System.out.println(subscriptionServiceRemote.matchesRooms(user));
 
 	}
 

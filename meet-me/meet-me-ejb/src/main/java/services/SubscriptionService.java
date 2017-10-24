@@ -11,6 +11,7 @@ import persistence.Hobby;
 import persistence.Member;
 import persistence.Room;
 import persistence.User;
+import utilities.Statistics;
 
 /**
  * Session Bean implementation class SubscriptionService
@@ -65,25 +66,32 @@ public class SubscriptionService implements SubscriptionServiceRemote, Subscript
 
 	@Override
 	public List<Room> matchesRooms(User user) {
-		Room room = basicOpsLocal.findRoomById(1);
-		Hobby hobby = Hobby.MUSIC;
-		getAverageByHobbyByRoom(room, hobby);
+		List<Room> rooms = basicOpsLocal.findAllRooms();
+
+		for (Room r : rooms) {
+			for (Hobby h : Hobby.values()) {
+				getAverageByHobbyByRoom(r, h);
+			}
+		}
 		return null;
 	}
 
-	public Float getAverageByHobbyByRoom(Room room, Hobby hobby) {
+	public Double getAverageByHobbyByRoom(Room room, Hobby hobby) {
 		List<User> memebers = room.getMembers();
 		if (memebers != null) {
-			int[] hobbiesValuesByMember = new int[memebers.size()];
+			double[] hobbiesValuesByMember = new double[memebers.size()];
 			for (User u : memebers) {
-
 				hobbiesValuesByMember[memebers.indexOf(u)] = ((Member) u).getHobbiesValues().get(hobby);
-				System.out.println("the member " + ((Member) u).getName() + "and the score is :"
-						+ hobbiesValuesByMember[memebers.indexOf(u)]);
-			}
-		}
 
-		return null;
+			}
+			Statistics statistics = new Statistics(hobbiesValuesByMember);
+			Double double1 = statistics.getStdDev() * 100;
+
+			System.out.println(double1.intValue());
+			return (double) double1.intValue();
+		}
+		System.out.println("empty");
+		return 100D;
 
 	}
 

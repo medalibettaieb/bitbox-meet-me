@@ -1,4 +1,4 @@
-package services;
+package utilities;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -18,6 +18,9 @@ import persistence.Hobby;
 import persistence.Member;
 import persistence.Room;
 import persistence.User;
+import services.BasicOpsLocal;
+import services.ReportingServiceLocal;
+import services.SubscriptionServiceLocal;
 
 /**
  * Session Bean implementation class AppUtilities
