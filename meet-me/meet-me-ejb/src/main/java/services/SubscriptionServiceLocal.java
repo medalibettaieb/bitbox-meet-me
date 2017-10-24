@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Local;
 
@@ -20,8 +21,12 @@ public interface SubscriptionServiceLocal {
 	void assignSuperviserToRoom(User user, Room room);
 
 	void requestForSubscription(User member, Room room);
-	
+
 	SubscriptionRequest findSubscriptionRequestById(User user, Room room, Date date);
-	
+
 	void requestTreatement(User user, Room room, Date date, ResquestStatus status);
+
+	List<SubscriptionRequest> findSuscriptionRequestsByRoom(Room room);
+	
+	List<User> findMembersRequestingThisRoom(Room room);
 }

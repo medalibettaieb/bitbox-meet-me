@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import persistence.Hobby;
 import persistence.Member;
@@ -129,6 +130,20 @@ public class SubscriptionService implements SubscriptionServiceRemote, Subscript
 		}
 
 		entityManager.merge(subscriptionRequest);
+	}
+
+	@Override
+	public List<SubscriptionRequest> findSuscriptionRequestsByRoom(Room room) {
+		String jpql = "SELECT s FROM SubscriptionRequest s WHERE s.room=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", room);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<User> findMembersRequestingThisRoom(Room room) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
