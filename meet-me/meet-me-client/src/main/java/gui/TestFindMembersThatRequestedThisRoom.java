@@ -1,23 +1,20 @@
 package gui;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import persistence.ResquestStatus;
 import persistence.Room;
 import persistence.User;
 import services.BasicOpsRemote;
 import services.ReportingServiceRemote;
 import services.SubscriptionServiceRemote;
 
-public class TestRequestTreatement {
+public class TestFindMembersThatRequestedThisRoom {
 
-	public static void main(String[] args) throws NamingException, ParseException {
+	public static void main(String[] args) throws NamingException {
 		Context context = new InitialContext();
 		BasicOpsRemote basicOpsRemote = (BasicOpsRemote) context
 				.lookup("meet-me-ear/meet-me-ejb/BasicOps!services.BasicOpsRemote");
@@ -26,13 +23,16 @@ public class TestRequestTreatement {
 		ReportingServiceRemote reportingServiceRemote = (ReportingServiceRemote) context
 				.lookup("meet-me-ear/meet-me-ejb/ReportingService!services.ReportingServiceRemote");
 
-		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-		
-		User user=basicOpsRemote.findUserById(4);
-		Room room=basicOpsRemote.findRoomById(1);
-		Date date=format.parse("2017-10-25");
-		
-		subscriptionServiceRemote.requestTreatement(user, room, date, ResquestStatus.ACCEPTED);
+		Room room = basicOpsRemote.findRoomById(1);
+
+		List<User> members = reportingServiceRemote.findMembersRequestingThisRoom(room);
+
+		System.out.println(members.size());
+
+		for (User u : members) {
+			System.out.println(u.getName());
+		}
+
 	}
 
 }

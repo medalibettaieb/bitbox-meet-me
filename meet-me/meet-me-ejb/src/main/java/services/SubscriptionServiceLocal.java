@@ -27,6 +27,5 @@ public interface SubscriptionServiceLocal {
 	void requestTreatement(User user, Room room, Date date, ResquestStatus status);
 
 	List<SubscriptionRequest> findSuscriptionRequestsByRoom(Room room);
-	
-	List<User> findMembersRequestingThisRoom(Room room);
+
 }

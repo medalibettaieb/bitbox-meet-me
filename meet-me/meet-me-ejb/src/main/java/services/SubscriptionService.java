@@ -140,10 +140,4 @@ public class SubscriptionService implements SubscriptionServiceRemote, Subscript
 		return query.getResultList();
 	}
 
-	@Override
-	public List<User> findMembersRequestingThisRoom(Room room) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

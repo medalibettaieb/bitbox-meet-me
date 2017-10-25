@@ -32,6 +32,6 @@ public interface SubscriptionServiceRemote {
 
 	List<SubscriptionRequest> findSuscriptionRequestsByRoom(Room room);
 	
-	List<User> findMembersRequestingThisRoom(Room room);
+	
 
 }

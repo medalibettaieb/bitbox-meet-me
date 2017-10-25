@@ -8,7 +8,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import persistence.Gender;
+import persistence.ResquestStatus;
 import persistence.Room;
+import persistence.SubscriptionRequest;
 import persistence.User;
 
 /**
@@ -45,4 +47,19 @@ public class ReportingService implements ReportingServiceRemote, ReportingServic
 		return null;
 	}
 
+	@Override
+	public List<User> findMembersRequestingThisRoom(Room room) {
+		String jpql = "SELECT u FROM User u INNER JOIN u.subscriptionRequests usr WHERE usr.room=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", room);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<SubscriptionRequest> findSubscriptionRequestsByStatus(ResquestStatus status) {
+		String jpql = "SELECT u FROM SubscriptionRequest u WHERE u.stateOfTheRequest=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", status);
+		return query.getResultList();
+	}
 }
