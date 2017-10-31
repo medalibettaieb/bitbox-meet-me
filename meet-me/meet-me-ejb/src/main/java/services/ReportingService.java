@@ -2,6 +2,7 @@ package services;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +21,8 @@ import persistence.User;
 public class ReportingService implements ReportingServiceRemote, ReportingServiceLocal {
 	@PersistenceContext
 	private EntityManager entityManager;
+	@EJB
+	private BasicOpsLocal basicOpsLocal;
 
 	/**
 	 * Default constructor.
@@ -43,8 +46,9 @@ public class ReportingService implements ReportingServiceRemote, ReportingServic
 
 	@Override
 	public Room findMostPopularRoom() {
-		// TODO Auto-generated method stub
-		return null;
+		String jpql = "SELECT sr from SubscriptionRequest sr  GROUP BY sr.room.id ORDER BY COUNT(sr.room.id) desc ";
+		Query query = entityManager.createQuery(jpql);
+		return basicOpsLocal.findRoomById(query.getFirstResult());
 	}
 
 	@Override

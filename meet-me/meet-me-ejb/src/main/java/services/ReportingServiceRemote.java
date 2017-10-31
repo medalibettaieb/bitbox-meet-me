@@ -23,4 +23,5 @@ public interface ReportingServiceRemote {
 	List<SubscriptionRequest> findSubscriptionRequestsByStatus(ResquestStatus status);
 	
 	
+	
 }
