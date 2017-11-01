@@ -71,12 +71,18 @@ public class AppUtilities {
 		Room room = new Room(37, new Color(0, 255, 0));
 		room.linkUsersToThisRoom(members);
 
+		Room room2 = new Room(12, new Color(0, 255, 0));
+		Room room3 = new Room(15, new Color(255, 255, 0));
+		Room room4 = new Room(68, new Color(255, 255, 255));
 		basicOpsLocal.addUser(agent);
 		basicOpsLocal.addUser(member);
 		basicOpsLocal.addUser(member2);
 		basicOpsLocal.addUser(member3);
 
 		basicOpsLocal.addRoom(room);
+		basicOpsLocal.addRoom(room2);
+		basicOpsLocal.addRoom(room3);
+		basicOpsLocal.addRoom(room4);
 
 	}
 

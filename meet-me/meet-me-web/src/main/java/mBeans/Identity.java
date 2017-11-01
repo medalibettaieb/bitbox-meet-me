@@ -2,12 +2,14 @@ package mBeans;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import persistence.Agent;
 import persistence.User;
 import services.BasicOpsLocal;
 
 @ManagedBean
+@SessionScoped
 public class Identity {
 	// injection of the dependency
 	@EJB
@@ -19,6 +21,7 @@ public class Identity {
 		String navigateTo = "/horror?faces-redirect=true";
 		User userLoggedIn = basicOpsLocal.login(user.getLogin(), user.getPassword());
 		if (userLoggedIn != null) {
+			user=userLoggedIn;
 			if (userLoggedIn instanceof Agent) {
 				navigateTo = "/pages/agentHome/home?faces-redirect=true";
 			} else {
