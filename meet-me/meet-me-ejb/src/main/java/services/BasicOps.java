@@ -96,4 +96,9 @@ public class BasicOps implements BasicOpsRemote, BasicOpsLocal {
 		return user;
 	}
 
+	@Override
+	public void saveOrUpdateUser(User user) {
+		entityManager.merge(user);
+
+	}
 }

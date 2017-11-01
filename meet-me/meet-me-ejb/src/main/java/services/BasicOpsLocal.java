@@ -9,6 +9,8 @@ import persistence.User;
 
 @Local
 public interface BasicOpsLocal {
+	void saveOrUpdateUser(User user);
+
 	void addUser(User user);
 
 	void deleteUser(User user);

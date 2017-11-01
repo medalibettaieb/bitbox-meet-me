@@ -16,15 +16,14 @@ public class Identity {
 	private User user = new User();
 
 	public String doLogin() {
-		String navigateTo = "";
+		String navigateTo = "/horror?faces-redirect=true";
 		User userLoggedIn = basicOpsLocal.login(user.getLogin(), user.getPassword());
 		if (userLoggedIn != null) {
 			if (userLoggedIn instanceof Agent) {
-				System.out.println("this is an agent");
+				navigateTo = "/pages/agentHome/home?faces-redirect=true";
 			} else {
-				System.out.println("this is an member");
+				navigateTo = "/pages/memberHome/home?faces-redirect=true";
 			}
-			System.out.println("not registred");
 		}
 
 		return navigateTo;

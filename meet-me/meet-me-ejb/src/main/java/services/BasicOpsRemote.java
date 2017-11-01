@@ -9,6 +9,8 @@ import persistence.User;
 
 @Remote
 public interface BasicOpsRemote {
+	void saveOrUpdateUser(User user);
+
 	void addUser(User user);
 
 	void deleteUser(User user);
@@ -30,7 +32,7 @@ public interface BasicOpsRemote {
 	Room findRoomById(int id);
 
 	List<Room> findAllRooms();
-	
+
 	User login(String login, String password);
 
 }
