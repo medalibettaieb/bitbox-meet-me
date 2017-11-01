@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import persistence.Gender;
+import persistence.Member;
 import persistence.ResquestStatus;
 import persistence.Room;
 import persistence.SubscriptionRequest;
@@ -14,7 +15,7 @@ import persistence.User;
 public interface ReportingServiceRemote {
 	List<User> findAllMembersByRoom(int idRoom);
 
-	List<User> findAllMembersByGender(Gender gender);
+	List<Member> findAllMembersByGender(Gender gender);
 
 	Room findMostPopularRoom();
 	

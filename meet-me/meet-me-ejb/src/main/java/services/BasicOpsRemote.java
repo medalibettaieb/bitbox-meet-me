@@ -30,5 +30,7 @@ public interface BasicOpsRemote {
 	Room findRoomById(int id);
 
 	List<Room> findAllRooms();
+	
+	User login(String login, String password);
 
 }

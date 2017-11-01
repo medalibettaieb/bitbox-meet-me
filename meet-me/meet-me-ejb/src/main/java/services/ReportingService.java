@@ -7,8 +7,12 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import persistence.Gender;
+import persistence.Member;
 import persistence.ResquestStatus;
 import persistence.Room;
 import persistence.SubscriptionRequest;
@@ -39,9 +43,13 @@ public class ReportingService implements ReportingServiceRemote, ReportingServic
 	}
 
 	@Override
-	public List<User> findAllMembersByGender(Gender gender) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Member> findAllMembersByGender(Gender gender) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+		Root<User> root = criteriaQuery.from(User.class);
+		criteriaQuery.select(root);
+		return  (List<Member>) criteriaQuery.select(root);
+
 	}
 
 	@Override

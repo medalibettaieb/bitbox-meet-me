@@ -30,4 +30,6 @@ public interface BasicOpsLocal {
 	Room findRoomById(int id);
 
 	List<Room> findAllRooms();
+
+	User login(String login, String password);
 }
