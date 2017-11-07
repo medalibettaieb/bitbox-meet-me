@@ -20,6 +20,10 @@ public interface SubscriptionServiceLocal {
 
 	void assignSuperviserToRoom(User user, Room room);
 
+	List<Room> matchesRooms(User user);
+
+	List<User> matchesMember(User theNewOne, Room room);
+
 	void requestForSubscription(User member, Room room);
 
 	SubscriptionRequest findSubscriptionRequestById(User user, Room room, Date date);
@@ -27,5 +31,7 @@ public interface SubscriptionServiceLocal {
 	void requestTreatement(User user, Room room, Date date, ResquestStatus status);
 
 	List<SubscriptionRequest> findSuscriptionRequestsByRoom(Room room);
+
+	List<SubscriptionRequest> findSuscriptionRequestsByMember(User user);
 
 }

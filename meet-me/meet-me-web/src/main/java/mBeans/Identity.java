@@ -16,15 +16,21 @@ public class Identity {
 	private BasicOpsLocal basicOpsLocal;
 	// the model
 	private User user = new User();
+	private boolean loggedInAsAgent = false;
+	private boolean loggedInAsMember = false;
 
 	public String doLogin() {
 		String navigateTo = "/horror?faces-redirect=true";
 		User userLoggedIn = basicOpsLocal.login(user.getLogin(), user.getPassword());
 		if (userLoggedIn != null) {
-			user=userLoggedIn;
+			user = userLoggedIn;
 			if (userLoggedIn instanceof Agent) {
+				loggedInAsAgent = true;
+				loggedInAsMember = false;
 				navigateTo = "/pages/agentHome/home?faces-redirect=true";
 			} else {
+				loggedInAsAgent = false;
+				loggedInAsMember = true;
 				navigateTo = "/pages/memberHome/home?faces-redirect=true";
 			}
 		}
@@ -38,6 +44,22 @@ public class Identity {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public boolean isLoggedInAsAgent() {
+		return loggedInAsAgent;
+	}
+
+	public void setLoggedInAsAgent(boolean loggedInAsAgent) {
+		this.loggedInAsAgent = loggedInAsAgent;
+	}
+
+	public boolean isLoggedInAsMember() {
+		return loggedInAsMember;
+	}
+
+	public void setLoggedInAsMember(boolean loggedInAsMember) {
+		this.loggedInAsMember = loggedInAsMember;
 	}
 
 }

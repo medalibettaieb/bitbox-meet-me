@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<h:form>
+		<h:dataTable value="#{roomManagementBean.subscriptionRequestsByAgent}"
+			var="r" border="2">
+			<h:column id="c1">
+				<f:facet name="header">
+					<h:outputText value="number" />
+				</f:facet>
+				<h:outputText value="#{r.room.number}" />
+			</h:column>
+			<h:column id="c2">
+				<f:facet name="header">
+					<h:outputText value="member" />
+				</f:facet>
+				<h:outputText value="#{r.member.name}" />
+			</h:column>
+			<h:column id="c4">
+				<f:facet name="header">
+					<h:outputText value="number" />
+				</f:facet>
+				<h:outputText value="#{r.stateOfTheRequest}" />
+			</h:column>
+			<h:column id="c3">
+				<f:facet name="header">
+					<h:outputText value="#" />
+				</f:facet>
+				<h:commandButton
+					action="#{roomManagementBean.doTreatRequest(accepted)}"
+					value="accept">
+					<f:setPropertyActionListener value="#{r}"
+						target="#{roomManagementBean.subscriptionRequestSelected}"></f:setPropertyActionListener>
+				</h:commandButton>
+				<h:commandButton
+					action="#{roomManagementBean.doTreatRequest(rejected)}"
+					value="reject">
+					<f:setPropertyActionListener value="#{r}"
+						target="#{roomManagementBean.subscriptionRequestSelected}"></f:setPropertyActionListener>
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</body>
+</html>

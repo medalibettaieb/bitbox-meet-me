@@ -140,4 +140,12 @@ public class SubscriptionService implements SubscriptionServiceRemote, Subscript
 		return query.getResultList();
 	}
 
+	@Override
+	public List<SubscriptionRequest> findSuscriptionRequestsByMember(User user) {
+		String jpql = "SELECT s FROM SubscriptionRequest s WHERE s.member=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", user);
+		return query.getResultList();
+	}
+
 }
